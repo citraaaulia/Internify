@@ -72,8 +72,8 @@ app.use(userRoutes);
 
 // app.post("/login", userRoutes.login);
 
-app.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('dashboard', { user: req.session.userId });
+app.get('/DataKelompok', ensureAuthenticated, (req, res) => {
+    res.render('DataKelompok');
 });
 
 app.listen(5000, () => {

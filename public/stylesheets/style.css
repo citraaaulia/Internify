@@ -1237,4 +1237,19 @@ video {
   .dark\:focus\:ring-offset-gray-800:focus {
     --tw-ring-offset-color: #1f2937;
   }
+
+.btn-outline {
+    border: 1px solid gray;
+    background-color: white;
+    color: black;
 }
+.btn-outline:hover {
+    background-color: lightgray;
+}
+.delete-btn {
+    border: 1px solid red;
+    color: red;
+    cursor: pointer;
+}
+}
+

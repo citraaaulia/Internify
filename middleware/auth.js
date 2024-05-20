@@ -9,7 +9,7 @@ const authenticate = async (req, res, next) => {
     const user = await User.findOne({ where: { NIM } });
     if (user && await bcrypt.compare(password, user.password)) {
         req.session.userId = user.id;
-        res.redirect('/dashboard');
+        res.redirect('/DataKelompok');
     } else {
       res.status(401).json({ message: 'Unauthorized' });
     }
