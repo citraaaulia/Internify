@@ -23,22 +23,27 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.userId = user.id;
-    res.redirect('/DataKelompok');
+    req.session.role = user.role; 
+    
+    if (user.role === 'Sekretaris Jurusan') {
+      res.redirect('/dashboardjurusan');
+    } else if (user.role === 'Mahasiswa') {
+      res.redirect('/DataKelompok');
+    } else {
+      res.status(401).json({ message: 'Unauthorized: Role not recognized' });
+    }
   } catch (err) {
-    res.status(500).json({ message: 'Something went wrong.' });
+    res.status(500).json({ message: 'Something went wrong.', error: err });
   }
 });
 
-// Definisikan fungsi callback
 const renderChangePasswordPage = (req, res) => {
   res.render('change-password');
 };
 
-// Gunakan fungsi callback di router
 router.get('/change-password', ensureAuthenticated, renderChangePasswordPage);
 
 
-// Proses perubahan password
 router.post('/change-password', ensureAuthenticated, async (req, res) => {
   const { currentPassword, newPassword } = req.body;
   try {
