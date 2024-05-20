@@ -24,7 +24,7 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.userId = user.id;
-    res.redirect('/dashboard');
+    res.redirect('/profile');
   } catch (err) {
     res.status(500).json({ message: 'Something went wrong.' });
   }

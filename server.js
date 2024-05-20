@@ -7,7 +7,7 @@ const db = require('./models');
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const { ensureAuthenticated } = require('./middleware/auth');
 const userRoutes = require('./routes/users');
@@ -20,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const sequelizeURI = "mysql://root:@localhost:3306/Pendaftaran_kp";
+const sequelizeURI = "mysql://root:@localhost:3307/db_pweb";
 
 const authenticate = async (req, res, next) => {
     const { NIM, password } = req.body;
@@ -72,8 +72,8 @@ app.use(userRoutes);
 
 // app.post("/login", userRoutes.login);
 
-app.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('dashboard', { user: req.session.userId });
+app.get('/profile', ensureAuthenticated, (req, res) => {
+    res.render('profile', { user: req.session.userId });
 });
 
 app.listen(5000, () => {

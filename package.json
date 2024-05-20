@@ -14,14 +14,15 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^3.1.10",
-    "express": "~4.16.1",
+    "express": "^4.19.2",
     "express-session": "^1.18.0",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
+    "jade": "^0.29.0",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.7",
-    "preline": "^2.1.0"
+    "preline": "^2.1.0",
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
