@@ -64,7 +64,7 @@ app.use(session({
 app.use('/users', userRoutes);
 
 
-app.get("/login", (req, res) => {
+app.get("/", (req, res) => {
     res.render("login");
 });
 
@@ -72,8 +72,16 @@ app.use(userRoutes);
 
 // app.post("/login", userRoutes.login);
 
-app.get('/profile', ensureAuthenticated, (req, res) => {
-    res.render('profile', { user: req.session.userId });
+app.get('/dashboardjurusan', ensureAuthenticated, (req, res) => {
+  res.render('dashboardjurusan', { user: req.session.userId });
+});
+
+app.get('/DataKelompok', ensureAuthenticated, (req, res) => {
+    res.render('DataKelompok');
+});
+
+app.get('/change-password', ensureAuthenticated, (req, res) => {
+  res.render('change-password');
 });
 
 app.listen(5000, () => {
