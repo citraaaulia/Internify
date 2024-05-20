@@ -3,8 +3,8 @@ const { User } = require('./models');
 const sequelize = require('./models').sequelize;
 
 const addUser = async () => {
-  const NIM = '2111521022'; 
-  const password = 'pwebA'; 
+  const NIM = '123456789'; 
+  const password = 'kptahun2025'; 
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
@@ -12,9 +12,9 @@ const addUser = async () => {
     const user = await User.create({
       NIM,
       password: hashedPassword,
-      name: 'Citra Aulia', 
+      name: 'Nindy Malisha', 
       departemen: 'Sistem Informasi', 
-      role: 'Mahasiswa', 
+      role: 'Sekretaris Jurusan', 
     });
 
     console.log('User added successfully:', user.toJSON());
