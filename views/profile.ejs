@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
     <link rel="stylesheet" href="/stylesheets/style_profile.css">
+    <style>
+        .btn {
+            display: inline-block;
+            font-size: 16px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,10 +36,33 @@
     </header>
     <div class="container">
         <div class="profile">
-            <img src="" alt="Profil Saya">
-            <h2><%=user%></h2>
+            <img class="profile" src="" alt="Profil Saya">
             <p>Deskripsi singkat tentang saya.</p>
+            <table class="table table-compact w-full">
+                <tbody>
+                  <tr>
+                    <th>Nama:</th>
+                    <td><%=user %></td>
+                  </tr>
+                  <tr>
+                    <th>Nama:</th>
+                    <td><%=user.nim %></td>
+                  </tr>
+                  <tr>
+                    <th>Nama:</th>
+                    <td><%= %></td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+
+
+
         </div>
+    </div>
+    <div class="btn-container">
+        <a href="/change-password" class="btn">Ubah Password</a>
     </div>
     <footer>
         <p>&copy; 2024 Profil Saya. Hak cipta dilindungi undang-undang.</p>

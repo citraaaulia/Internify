@@ -84,6 +84,11 @@ app.get('/change-password', ensureAuthenticated, (req, res) => {
   res.render('change-password');
 });
 
+app.get('/profile', ensureAuthenticated, (req, res) => {
+  res.render('profile', { user: req.session.userId });
+});
+
+
 app.listen(5000, () => {
     console.log("Server Running on http://localhost:5000")
 });
