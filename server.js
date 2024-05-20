@@ -76,6 +76,10 @@ app.get('/DataKelompok', ensureAuthenticated, (req, res) => {
     res.render('DataKelompok');
 });
 
+app.get('/change-password', ensureAuthenticated, (req, res) => {
+  res.render('change-password');
+});
+
 app.listen(5000, () => {
     console.log("Server Running on http://localhost:5000")
 });
