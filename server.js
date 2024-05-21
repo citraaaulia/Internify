@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const path = require('path');
 const db = require('./models'); 
+const {User}= require('./models/index');
 
 
 const app = express();
@@ -84,8 +85,9 @@ app.get('/change-password', ensureAuthenticated, (req, res) => {
   res.render('change-password');
 });
 
-app.get('/profile', ensureAuthenticated, (req, res) => {
-  res.render('profile', { user: req.session.userId });
+app.get('/profile', ensureAuthenticated, async(req, res) => {
+  const user = await User.findByPk(req.session.userId);
+  res.render('profile', { user});
 });
 
 

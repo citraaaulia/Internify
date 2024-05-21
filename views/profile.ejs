@@ -39,22 +39,31 @@
             <img class="profile" src="" alt="Profil Saya">
             <p>Deskripsi singkat tentang saya.</p>
             <table class="table table-compact w-full">
-                <tbody>
-                  <tr>
-                    <th>Nama:</th>
-                    <td><%=user %></td>
-                  </tr>
-                  <tr>
-                    <th>Nama:</th>
-                    <td><%=user.nim %></td>
-                  </tr>
-                  <tr>
-                    <th>Nama:</th>
-                    <td><%= %></td>
-                  </tr>
-                </tbody>
-              </table>
+  <tbody>
+    <tr>
+      <th>Nama</th>
+      <td>:<%= user.name %></td>
+    </tr>
+    <tr>
+      <th>NIM</th>
+      <td>:<%= user.NIM %></td>
+    </tr>
+    <tr>
+      <th>Peran</th>
+      <td>:<%= user.role %></td>
+    </tr>
+    <tr>
+      <th>Departemen</th>
+      <td>:<%= user.departemen %></td>
+    </tr>
+  </tbody>
+</table>
 
+<style>
+  table th, table td {
+    text-align: left; /* Pastikan teks rata kiri */
+  }
+</style>
 
 
 
