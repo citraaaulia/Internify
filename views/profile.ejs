@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <link rel="stylesheet" href="/stylesheets/style_profile.css">
+    <style>
+        .btn {
+            display: inline-block;
+            font-size: 16px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Profil Mahasiswa</h1>
+    </header>
+    <div class="container">
+        <div class="profile">
+            <img class="profile" src="" alt="Profil Saya">
+            <p>Deskripsi singkat tentang saya.</p>
+            <table class="table table-compact w-full">
+  <tbody>
+    <tr>
+      <th>Nama</th>
+      <td>:<%= user.name %></td>
+    </tr>
+    <tr>
+      <th>NIM</th>
+      <td>:<%= user.NIM %></td>
+    </tr>
+    <tr>
+      <th>Peran</th>
+      <td>:<%= user.role %></td>
+    </tr>
+    <tr>
+      <th>Departemen</th>
+      <td>:<%= user.departemen %></td>
+    </tr>
+  </tbody>
+</table>
+
+<style>
+  table th, table td {
+    text-align: left; /* Pastikan teks rata kiri */
+  }
+</style>
+
+
+
+
+        </div>
+    </div>
+    <div class="btn-container">
+        <a href="/change-password" class="btn">Ubah Password</a>
+    </div>
+    <footer>
+        <p>&copy; 2024 Profil Saya. Hak cipta dilindungi undang-undang.</p>
+    </footer>
+</body>
+</html>
