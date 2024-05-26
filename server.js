@@ -90,6 +90,10 @@ app.get('/profile', ensureAuthenticated, async(req, res) => {
   res.render('profile', { user});
 });
 
+app.get('/surat-balasan', ensureAuthenticated, (req, res) => {
+  res.render('surat-balasan');
+});
+
 
 app.listen(5000, () => {
     console.log("Server Running on http://localhost:5000")
