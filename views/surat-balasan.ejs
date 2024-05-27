@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Kerja Praktek</title>
+    <link rel="stylesheet" href="/stylesheets/style_sb.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Pendaftaran Kerja Praktek</h2>
+            <ul>
+                <li>Profil</li>
+                <li>Notifikasi</li>
+                <li>Alur Pendaftaran</li>
+                <li >Proposal</li>
+                <li>Surat Pengantar</li>
+                <li class="active">Surat Balasan</li>
+                <li>Surat Tugas</li>
+                
+            </ul>
+        </div>
+        <div class="content">
+            <h1>Unggah Surat Balasan</h1>
+            <form>
+                <label for="tanggal-pengajuan">Tanggal Pengajuan</label>
+                <input type="date" id="tanggal-pengajuan">
+                
+                <label for="perusahaan-tujuan">Perusahaan Tujuan</label>
+                <input type="text" id="perusahaan-tujuan">
+                
+                <label>Status</label>
+                <div class="radio-group">
+                    <input type="radio" id="diterima" name="status" value="diterima">
+                    <label for="diterima">Diterima</label>
+                    <input type="radio" id="ditolak" name="status" value="ditolak">
+                    <label for="ditolak">Ditolak</label>
+                </div>
+                
+                <div class="upload-section">
+                    <input type="file" id="file-upload" accept=".pdf">
+                </div>
+                
+                <button type="submit">Kirim</button>
+                <button class="delete-button">Hapus</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('delete-button').addEventListener('click', function() {
+            document.getElementById('file-upload').value = "";
+        });
+    </script>
+</body>
+</html>

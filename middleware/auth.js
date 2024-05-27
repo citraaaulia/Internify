@@ -8,8 +8,15 @@ const authenticate = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { NIM } });
     if (user && await bcrypt.compare(password, user.password)) {
+        req.session.role = user.role;
         req.session.userId = user.id;
-        res.redirect('/DataKelompok');
+        if (user.role === 'Sekretaris Jurusan'){
+          res.direct('/dashboardjurusan');
+        } else if (user.role === 'Mahasiswa'){
+          res.direct('/DataKelompok');
+        } else {
+          res.status(401).json({message: 'Unauthorized: Role not recognized'});
+        }
     } else {
       res.status(401).json({ message: 'Unauthorized' });
     }

@@ -2,6 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize('db_pweb', 'root', '', {
     host: 'localhost',
+    port : '3307',
     dialect: 'mysql', 
 });
 

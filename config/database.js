@@ -2,6 +2,7 @@ const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('db_pweb', 'root', 'password', {
   host: '127.0.0.1',
+  port : '3307',
   dialect: 'mysql'
 });
 const authenticate = async (req, res, next) => {

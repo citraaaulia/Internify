@@ -4,10 +4,11 @@ const bcrypt = require('bcryptjs');
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const path = require('path');
 const db = require('./models'); 
+const {User}= require('./models/index');
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const { ensureAuthenticated } = require('./middleware/auth');
 const userRoutes = require('./routes/users');
@@ -20,7 +21,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const sequelizeURI = "mysql://root:@localhost:3306/Pendaftaran_kp";
+const sequelizeURI = "mysql://root:@localhost:3307/db_pweb";
 
 const authenticate = async (req, res, next) => {
     const { NIM, password } = req.body;
@@ -64,7 +65,7 @@ app.use(session({
 app.use('/users', userRoutes);
 
 
-app.get("/login", (req, res) => {
+app.get("/", (req, res) => {
     res.render("login");
 });
 
@@ -72,9 +73,27 @@ app.use(userRoutes);
 
 // app.post("/login", userRoutes.login);
 
+app.get('/dashboardjurusan', ensureAuthenticated, (req, res) => {
+  res.render('dashboardjurusan', { user: req.session.userId });
+});
+
 app.get('/DataKelompok', ensureAuthenticated, (req, res) => {
     res.render('DataKelompok');
 });
+
+app.get('/change-password', ensureAuthenticated, (req, res) => {
+  res.render('change-password');
+});
+
+app.get('/profile', ensureAuthenticated, async(req, res) => {
+  const user = await User.findByPk(req.session.userId);
+  res.render('profile', { user});
+});
+
+app.get('/surat-balasan', ensureAuthenticated, (req, res) => {
+  res.render('surat-balasan');
+});
+
 
 app.listen(5000, () => {
     console.log("Server Running on http://localhost:5000")
