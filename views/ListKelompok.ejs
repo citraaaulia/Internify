@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Data Kelompok</title>
+</head>
+<body>
+    <form action="/dataKelompok/save" method="POST">
+        <label for="nama_kelompok">Nama Kelompok:</label>
+        <input type="text" id="nama_kelompok" name="nama_kelompok" required>
+        <label for="anggota">Anggota (dalam format JSON):</label>
+        <textarea id="anggota" name="anggota" required>[{"nama": "John Doe", "peran": "Ketua"}, {"nama": "Jane Smith", "peran": "Anggota"}]</textarea>
+        <button type="submit">Simpan</button>
+    </form>
+</body>
+</html>

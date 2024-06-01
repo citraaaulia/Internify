@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { User } = require('../models');
 const bcrypt = require('bcryptjs');
 const { authenticate } = require('../middleware/auth');
-const ensureAuthenticated = require('../middleware/auth');
 
 router.get('/protected', authenticate, (req, res) => {
   res.status(200).json({ message: 'This is a protected route', user: req.user });
