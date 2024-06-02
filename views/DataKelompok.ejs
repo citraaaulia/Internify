@@ -14,83 +14,116 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .profile-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .profile-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
         .delete-btn {
-        color: red;
-        cursor: pointer;
-}
+            color: red;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-<main>
-    <div class="max-w-2xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-neutral-900">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-neutral-200">
-                    Data Kelompok
-                </h2>
-                <p class="text-sm text-gray-600 dark:text-neutral-400">
-                    Isi Data Anggota Kelompok Anda
-                </p>
-            </div>
-    
-            <form id="kelompokForm">
-                <div id="anggota-container">
-                    <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent anggota-section">
-                        <label class="inline-block text-sm font-medium dark:text-white">
-                            Anggota 1
-                        </label>
-                        <div class="mt-2 space-y-3">
-                            <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Nama Lengkap">
-                            <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="NIM">
-                        </div>
-                        <div class="mt-2">
-                            <button type="button" class="delete-btn">Delete</button>
+    <div class="header-container">
+        <h1 class="text-2xl font-bold">Selamat Datang Mahasiswa</h1>
+        <a href="./profile" class="profile-btn">Lihat Profile</a>
+    </div>
+    <main>
+        <!-- Card Section -->
+        <div class="max-w-2xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+            <!-- Card -->
+            <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-neutral-900">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-neutral-200">
+                        Data Kelompok
+                    </h2>
+                    <p class="text-sm text-gray-600 dark:text-neutral-400">
+                        Isi Data Anggota Kelompok Anda
+                    </p>
+                </div>
+        
+                <form id="kelompokForm">
+                    <!-- Section -->
+                    <div id="anggota-container">
+                        <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 dark:border-neutral-700 dark:first:border-transparent anggota-section">
+                            <label class="inline-block text-sm font-medium dark:text-white">
+                                Anggota 1
+                            </label>
+                            <div class="mt-2 space-y-3">
+                                <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Nama Lengkap">
+                                <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="NIM">
+                            </div>
+                            <div class="mt-2">
+                                <button type="button" class="delete-btn">Delete</button>
+                            </div>
                         </div>
                     </div>
+                    <!-- End Section -->
+                </form>
+        
+                <div class="mt-5 flex justify-end gap-x-2">               
+                    <button type="button" id="add-anggota" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none btn-outline">
+                        Tambah Anggota
+                    </button>
+                    <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                        Simpan
+                    </button>
                 </div>
-            </form>
-    
-            <div class="mt-5 flex justify-end gap-x-2">
-                <button type="button" id="add-anggota" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none btn-outline">
-                    Tambah Anggota
-                </button>
-                <button type="button" id="simpan" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
-                    Simpan
-                </button>
             </div>
+            <!-- End Card -->
         </div>
-    </div>
-</main>
-<script>
-    document.getElementById('add-anggota').addEventListener('click', function() {
-        const anggotaContainer = document.getElementById('anggota-container');
-        const anggotaCount = anggotaContainer.children.length + 1;
+        <!-- End Card Section -->
+    </main>
+    <script>
+        document.getElementById('add-anggota').addEventListener('click', function() {
+            const anggotaContainer = document.getElementById('anggota-container');
+            const anggotaCount = anggotaContainer.children.length + 1;
 
-        const newAnggotaSection = document.createElement('div');
-        newAnggotaSection.classList.add('py-6', 'first:pt-0', 'last:pb-0', 'border-t', 'first:border-transparent', 'border-gray-200', 'dark:border-neutral-700', 'dark:first:border-transparent', 'anggota-section');
-        newAnggotaSection.innerHTML = `
-            <label class="inline-block text-sm font-medium dark:text-white">
-                Anggota ${anggotaCount}
-            </label>
-            <div class="mt-2 space-y-3">
-                <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Nama Lengkap">
-                <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="NIM">
-            </div>
-            <div class="mt-2">
-                <button type="button" class="delete-btn py-2 px-3">Delete</button>
-            </div>
-        `;
+            const newAnggotaSection = document.createElement('div');
+            newAnggotaSection.classList.add('py-6', 'first:pt-0', 'last:pb-0', 'border-t', 'first:border-transparent', 'border-gray-200', 'dark:border-neutral-700', 'dark:first:border-transparent', 'anggota-section');
+            newAnggotaSection.innerHTML = `
+                <label class="inline-block text-sm font-medium dark:text-white">
+                    Anggota ${anggotaCount}
+                </label>
+                <div class="mt-2 space-y-3">
+                    <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Nama Lengkap">
+                    <input type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="NIM">
+                </div>
+                <div class="mt-2">
+                    <button type="button" class="delete-btn py-2 px-3">Delete</button>
+                </div>
+            `;
 
-        anggotaContainer.appendChild(newAnggotaSection);
-        updateDeleteButtons();
-    });
-
-    function updateDeleteButtons() {
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.removeEventListener('click', handleDelete);
-            button.addEventListener('click', handleDelete);
+            anggotaContainer.appendChild(newAnggotaSection);
+            updateDeleteButtons();
         });
-    }
+
+        function updateDeleteButtons() {
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.removeEventListener('click', handleDelete);
+                button.addEventListener('click', handleDelete);
+            });
+        }
 
     function handleDelete(event) {
         const section = event.target.closest('.anggota-section');
@@ -124,9 +157,9 @@
         }
     });
 
-    // Initialize delete button event listeners on page load
-    updateDeleteButtons();
-</script>
-<script src="/javascripts/preline.js"></script>
+        // Initialize delete button event listeners on page load
+        updateDeleteButtons();
+    </script>
+    <script src="/javascripts/preline.js"></script>
 </body>
 </html>

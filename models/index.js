@@ -1,7 +1,13 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const path = require('path');
 
-const sequelize = new Sequelize('mysql://root:@localhost:3306/db_pweb');
+const sequelize = new Sequelize('db_pweb', 'root', '', {
+    host: 'localhost',
+    port : '3307',
+    dialect: 'mysql', 
+});
+
+const User = require('./User')(sequelize, Sequelize.DataTypes);
 
 const db = {};
 db.Sequelize = Sequelize;

@@ -3,11 +3,12 @@ const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const path = require('path');
-const db = require('./models');
+const db = require('./models'); 
+const {User}= require('./models/index');
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const { ensureAuthenticated } = require('./middleware/auth');
 const userRoutes = require('./routes/users');
@@ -21,7 +22,30 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// const sequelize = new Sequelize('mysql://root:@localhost:3306/db_pweb');
+const sequelizeURI = "mysql://root:@localhost:3307/db_pweb";
+
+const authenticate = async (req, res, next) => {
+    const { NIM, password } = req.body;
+    try {
+      const user = await UserModel.findOne({ where: { NIM } });
+      if (user && await bcrypt.compare(password, user.password)) {
+        req.session.userId = user.id; // Set user id in session
+        next();
+      } else {
+        res.status(401).json({ message: 'Unauthorized' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: 'Internal server error', error });
+    }
+  };
+
+db.sequelize.authenticate()
+  .then(() => {
+    console.log('MySQL Connected');
+  })
+  .catch(err => {
+    console.error('Error connecting to the database:', err);
+  });
 
 const store = new SequelizeStore({
   db: db.sequelize
@@ -47,8 +71,27 @@ app.get('/', (req, res) => {
   res.render('login');
 });
 
+app.use(userRoutes);
+
+app.get('/dashboardjurusan', ensureAuthenticated, (req, res) => {
+  res.render('dashboardjurusan', { user: req.session.userId });
+});
+
 app.get('/DataKelompok', ensureAuthenticated, (req, res) => {
   res.render('DataKelompok');
+});
+
+app.get('/change-password', ensureAuthenticated, (req, res) => {
+  res.render('change-password');
+});
+
+app.get('/profile', ensureAuthenticated, async(req, res) => {
+  const user = await User.findByPk(req.session.userId);
+  res.render('profile', { user});
+});
+
+app.get('/surat-balasan', ensureAuthenticated, (req, res) => {
+  res.render('surat-balasan');
 });
 
 app.get('/dashboard', (req, res) => {
@@ -57,20 +100,6 @@ app.get('/dashboard', (req, res) => {
 
 const sequelize = db.sequelize;
 
-const authenticate = async (req, res, next) => {
-  const { NIM, password } = req.body;
-  try {
-    const user = await db.User.findOne({ where: { NIM } });
-    if (user && await bcrypt.compare(password, user.password)) {
-      req.session.userId = user.id; // Set user id in session
-      next();
-    } else {
-      res.status(401).json({ message: 'Unauthorized' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Internal server error', error });
-  }
-};
 
 sequelize.authenticate()
 .then(() => {
@@ -81,4 +110,8 @@ sequelize.authenticate()
 })
 .catch(err => {
   console.error('Error connecting to the database:', err);
+});
+
+app.listen(5000, () => {
+  console.log("Server Running on http://localhost:5000")
 });
