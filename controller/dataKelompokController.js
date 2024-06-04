@@ -1,10 +1,9 @@
-const { DataKelompok, Anggota } = require('../models');
+const { Anggota, DataKelompok } = require('../models');
 
-// Mendapatkan semua data kelompok
 exports.getAllDataKelompok = async (req, res) => {
   try {
     const dataKelompok = await DataKelompok.findAll({
-      include: 'anggota'
+      include: [{ model: Anggota }]
     });
     res.json(dataKelompok);
   } catch (error) {
@@ -12,7 +11,6 @@ exports.getAllDataKelompok = async (req, res) => {
   }
 };
 
-// Menambahkan data kelompok baru
 exports.addDataKelompok = async (req, res) => {
   const { anggota } = req.body;
 
@@ -31,7 +29,6 @@ exports.addDataKelompok = async (req, res) => {
   }
 };
 
-// Menghapus data kelompok berdasarkan ID
 exports.deleteDataKelompok = async (req, res) => {
   const { id } = req.params;
 

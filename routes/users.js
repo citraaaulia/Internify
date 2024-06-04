@@ -1,63 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const { User } = require('../models');
-const bcrypt = require('bcryptjs');
+var express = require('express');
+var router = express.Router();
 const { authenticate, ensureAuthenticated } = require('../middleware/auth');
+const userController = require('../controller/userController');
 
-router.get('/protected', authenticate, (req, res) => {
-  res.status(200).json({ message: 'This is a protected route', user: req.user });
-});
+router.get('/protected', authenticate, userController.protectedRoute);
 
-router.post('/login', async (req, res) => {
-  const { NIM, password } = req.body;
+router.post('/login', userController.loginUser);
+router.post('/UnggahProposal', userController.loginUser);
 
-  try {
-    const user = await User.findOne({ where: { NIM } });
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid NIM or password.' });
-    }
+router.get('/change-password', ensureAuthenticated, userController.renderChangePasswordPage);
 
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-      return res.status(400).json({ message: 'Invalid NIM or password.' });
-    }
-
-    req.session.userId = user.id;
-    req.session.role = user.role; 
-    
-    if (user.role === 'Sekretaris Jurusan') {
-      res.redirect('/dashboardjurusan');
-    } else if (user.role === 'Mahasiswa') {
-      res.redirect('/DataKelompok');
-    } else {
-      res.status(401).json({ message: 'Unauthorized: Role not recognized' });
-    }
-  } catch (err) {
-    res.status(500).json({ message: 'Something went wrong.', error: err });
-  }
-});
-
-const renderChangePasswordPage = (req, res) => {
-  res.render('change-password');
-};
-
-router.get('/change-password', ensureAuthenticated, renderChangePasswordPage);
-
-
-router.post('/change-password', ensureAuthenticated, async (req, res) => {
-  const { currentPassword, newPassword } = req.body;
-  try {
-    const user = await User.findByPk(req.session.userId);
-    const validPassword = await bcrypt.compare(currentPassword, user.password);
-    if (!validPassword) {
-      return res.status(400).json({ message: 'Current password is incorrect.' });
-    }
-    user.password = await bcrypt.hash(newPassword, 10);
-    await user.save();
-    res.redirect('/login');
-  } catch (err) {
-    res.status(500).json({ message: 'Something went wrong.' });
-  }
-});
+router.post('/change-password', ensureAuthenticated, userController.changePassword);
 
 module.exports = router;

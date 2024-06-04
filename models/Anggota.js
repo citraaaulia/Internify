@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'DataKelompok', 
+                model: 'DataKelompoks', 
                 key: 'id'
             },
             onUpdate: 'CASCADE',

@@ -16,13 +16,14 @@ const dataKelompokRoutes = require('./routes/dataKelompok');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/stylelsheets", express.static('dist'))
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const sequelizeURI = "mysql://root:@localhost:3307/db_pweb";
+const sequelizeURI = "mysql://root:@localhost:3306/db_pweb";
 
 const authenticate = async (req, res, next) => {
     const { NIM, password } = req.body;
@@ -63,7 +64,6 @@ app.use(session({
   },
 }));
 
-// Routes
 app.use('/users', userRoutes);
 app.use('/dataKelompok', dataKelompokRoutes);
 
@@ -77,7 +77,11 @@ app.get('/dashboardjurusan', ensureAuthenticated, (req, res) => {
   res.render('dashboardjurusan', { user: req.session.userId });
 });
 
-app.get('/DataKelompok', ensureAuthenticated, (req, res) => {
+app.get('/UnggahProposal', ensureAuthenticated, (req, res) => {
+  res.render('UnggahProposal', { user: req.session.userId });
+});
+
+app.get('/DataKelompok', (req, res) => {
   res.render('DataKelompok');
 });
 
@@ -98,6 +102,10 @@ app.get('/dashboard', (req, res) => {
   res.render('dashboard');
 });
 
+app.get('/suratpengantarsekjur', (req, res) => {
+  res.render('suratpengantarsekjur');
+});
+
 const sequelize = db.sequelize;
 
 
@@ -105,13 +113,9 @@ sequelize.authenticate()
 .then(() => {
   console.log('MySQL Connected');
   app.listen(PORT, () => {
-    console.log(`Server Running on http://localhost:${PORT}`);
+    console.log(`Server Running on http://localhost:5000`);
   });
 })
 .catch(err => {
   console.error('Error connecting to the database:', err);
-});
-
-app.listen(5000, () => {
-  console.log("Server Running on http://localhost:5000")
 });

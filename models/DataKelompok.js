@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true, 
             autoIncrement: true
-        }
+        },
+        tableName: 'datakelompoks'
     });
 
     DataKelompok.associate = models => {

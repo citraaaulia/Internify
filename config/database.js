@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('db_pweb', 'root', 'password', {
+const sequelize = new Sequelize('db_pweb', 'root', '', {
   host: '127.0.0.1',
-  port : '3307',
+  port : '3306',
   dialect: 'mysql'
 });
 const authenticate = async (req, res, next) => {
@@ -10,7 +10,7 @@ const authenticate = async (req, res, next) => {
     try {
       const user = await UserModel.findOne({ where: { NIM } });
       if (user && await bcrypt.compare(password, user.password)) {
-        req.session.userId = user.id; // Set user id in session
+        req.session.userId = user.id; 
         next();
       } else {
         res.status(401).json({ message: 'Unauthorized' });
