@@ -125,10 +125,37 @@
             });
         }
 
-        function handleDelete(event) {
-            const section = event.target.closest('.anggota-section');
-            section.remove();
+    function handleDelete(event) {
+        const section = event.target.closest('.anggota-section');
+        section.remove();
+    }
+
+    document.getElementById('simpan').addEventListener('click', async function() {
+        const anggotaSections = document.querySelectorAll('.anggota-section');
+        const anggotaData = [];
+
+        anggotaSections.forEach(section => {
+            const nama = section.querySelector('input[placeholder="Nama Lengkap"]').value;
+            const NIM = section.querySelector('input[placeholder="NIM"]').value;
+            anggotaData.push({ nama, NIM });
+        });
+
+        const response = await fetch('/dataKelompok/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                anggota: JSON.stringify(anggotaData)
+            })
+        });
+
+        if (response.ok) {
+            alert('Data berhasil disimpan');
+        } else {
+            alert('Gagal menyimpan data');
         }
+    });
 
         // Initialize delete button event listeners on page load
         updateDeleteButtons();

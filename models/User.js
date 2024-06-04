@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
       NIM: {
@@ -13,6 +15,13 @@ module.exports = (sequelize, DataTypes) => {
       departemen: DataTypes.STRING,
       role: DataTypes.STRING,
     });
+
+    User.beforeCreate(async (user) => {
+      if (user.password) {
+          const salt = await bcrypt.genSalt(10);
+          user.password = await bcrypt.hash(user.password, salt);
+      }
+  });
+
     return User;
   };
-  

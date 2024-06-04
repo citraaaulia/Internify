@@ -13,7 +13,7 @@ const authenticate = async (req, res, next) => {
         if (user.role === 'Sekretaris Jurusan'){
           res.direct('/dashboardjurusan');
         } else if (user.role === 'Mahasiswa'){
-          res.direct('/DataKelompok');
+          res.direct('/UnggahProposal');
         } else {
           res.status(401).json({message: 'Unauthorized: Role not recognized'});
         }
